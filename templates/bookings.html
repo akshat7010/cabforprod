@@ -1,0 +1,33 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block content %}
+<div class="bg-light py-5">
+    <div class="container py-5">
+        <h2>{{ title }} :</h2>
+        <br>
+        {% if not booking_list %}
+        <h3>Sorry, no results found.</h3>
+        {% else %}
+        {% for obj in booking_list %}
+        <div class="card">
+          <h5 class="card-header">{{ obj.date}}  {{ obj.time}}</h5>
+          <div class="card-body">
+            <p class="card-text">Number of passengers: {{ obj.passengers}}</p>
+              <p class="card-text">Gender: {{ obj.gender}}</p>
+              <p class="card-text">Pickup from: {{ obj.pickup_from}}</p>
+              <p class="card-text">Destination: {{ obj.destination}}</p>
+             <p class="card-text">Booking ID: {{ obj.id}}</p>
+            <a class="btn btn-primary" href="{{obj.id}}/cancel" onclick="myFunction();">Cancel your booking</a>
+              <script>
+                                function myFunction() {
+                                  alert("Your booking has been cancelled.");
+                                }
+              </script>
+          </div>
+        </div>
+        <br>
+{% endfor %}
+{% endif %}
+    </div>
+</div>
+{% endblock %}
